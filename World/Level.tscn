@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=3 uid="uid://mygc0maiddsb"]
+
+[ext_resource type="Script" path="res://World/BlockManager.gd" id="1_jxqmd"]
+[ext_resource type="PackedScene" uid="uid://cyfcir27ut75p" path="res://World/Chunk.tscn" id="1_vpbha"]
+[ext_resource type="Script" path="res://World/Block.gd" id="2_ufjoi"]
+[ext_resource type="Texture2D" uid="uid://bdskg6bt45ldl" path="res://Art/stone.webp" id="3_7tq56"]
+[ext_resource type="Texture2D" uid="uid://brid7gsko0yh1" path="res://Art/dirt.webp" id="4_pjk8j"]
+[ext_resource type="Texture2D" uid="uid://7fra1virgdb8" path="res://Art/grass.webp" id="5_oa8ct"]
+
+[sub_resource type="Resource" id="Resource_sk03i"]
+script = ExtResource("2_ufjoi")
+name = "air"
+
+[sub_resource type="Resource" id="Resource_yg680"]
+script = ExtResource("2_ufjoi")
+texture = ExtResource("3_7tq56")
+name = "stone"
+
+[sub_resource type="Resource" id="Resource_v6sot"]
+script = ExtResource("2_ufjoi")
+texture = ExtResource("4_pjk8j")
+name = "dirt"
+
+[sub_resource type="Resource" id="Resource_pakg1"]
+script = ExtResource("2_ufjoi")
+texture = ExtResource("5_oa8ct")
+name = "grass"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_osx64"]
+
+[node name="Level" type="Node3D"]
+
+[node name="BlockManager" type="Node" parent="."]
+script = ExtResource("1_jxqmd")
+air = SubResource("Resource_sk03i")
+stone = SubResource("Resource_yg680")
+dirt = SubResource("Resource_v6sot")
+grass = SubResource("Resource_pakg1")
+
+[node name="Chunk" parent="." instance=ExtResource("1_vpbha")]
+noise = SubResource("FastNoiseLite_osx64")
+
+[node name="Chunk2" parent="." instance=ExtResource("1_vpbha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -16)
+
+[node name="Chunk3" parent="." instance=ExtResource("1_vpbha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.08165e-12, 2.08165e-12)
+
+[node name="Chunk4" parent="." instance=ExtResource("1_vpbha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.08165e-12, -16)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.267339, 0.963602, 0, -0.963602, 0.267339, 16, 48, -32)
+light_color = Color(0.611765, 0.611765, 0.611765, 1)
+shadow_enabled = true
